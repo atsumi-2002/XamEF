@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XamEF.Views.UStudentPage"
+             Title="Actualizacion de estudiante">
+    <ContentPage.Content>
+        <StackLayout
+            Padding="20,20,20,20">
+            <Label 
+                Text="Nombre"/>
+            <Entry 
+                Placeholder="Nombre completo"
+                Text="{Binding Name}"/>
+
+            <Label
+                Text="Fecha de ingreso:"/>
+            <DatePicker 
+                MinimumDate="01/01/1999" 
+                MaximumDate="12/30/3000" 
+                Date="{Binding EntryDate}"/>
+
+            <Label
+                Text="Promedio actual:"/>
+            <Entry 
+                Placeholder="Promedio actual"
+                Keyboard="Numeric"
+                Text="{Binding Average}"/>
+
+            <Label
+                Text="Esta estudiando?"/>
+            <Switch
+                IsToggled="{Binding IsStudy}"/>
+
+            <Button
+                Text="Actualizar"
+                Command="{Binding updateStudent}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

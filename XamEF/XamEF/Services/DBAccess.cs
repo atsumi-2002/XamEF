@@ -1,9 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using XamEF.DataContext;
+using XamEF.Models;
 
 
 namespace XamEF.Services
@@ -11,6 +13,7 @@ namespace XamEF.Services
     public class DBAccess<T> where T : class
     {
         private readonly DBContext _context;
+        private ObservableCollection<Student> students;
 
         public DBAccess() => _context = App.GetContext();
 
@@ -43,6 +46,11 @@ namespace XamEF.Services
             return _context.Set<T>().Where(predicate).AsEnumerable<T>();
         }
 
+        public IEnumerable<Student> GetById(int id)
+        {
+            return _context.Studiantes.Where(x => x.StudentId.Equals(id)).AsEnumerable<Student>();
+        }
+
         public IEnumerable<T> Get(Expression<Func<T, bool>> whereCondition = null,
                                   Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
                                   string includeProperties = "")
@@ -70,11 +78,29 @@ namespace XamEF.Services
             }
         }
 
-        public void Update(T entity)
+        public void Update1(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             _context.Set<T>().Attach(entity);
             _context.SaveChanges();
+        }
+        public bool Update(Student entity)
+        {
+            bool updated;
+            try
+            {
+                _context.Update(entity);
+                //_context.Entry(entity).State = EntityState.Modified;
+                //_context.Set<T>().Attach(entity);
+                _context.SaveChanges();
+
+                updated = true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return updated;
         }
 
         public void Delete(T entity)
@@ -84,6 +110,18 @@ namespace XamEF.Services
             if (existing != null)
             {
                 _context.Set<T>().Remove(existing);
+                _context.SaveChanges();
+            }
+        }
+
+        public void DeleteStudent(int id)
+        {
+            var existing = _context.Studiantes.Where(x => x.StudentId.Equals(id)).AsEnumerable<Student>();
+            var Students = new ObservableCollection<Student>(existing);
+
+            if (Students[0] != null)
+            {
+                _context.Studiantes.Remove(Students[0]);
                 _context.SaveChanges();
             }
         }

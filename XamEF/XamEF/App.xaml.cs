@@ -13,7 +13,7 @@ namespace XamEF
             InitializeComponent();
 
             GetContext().Database.EnsureCreated();
-            MainPage = new NavigationPage(new Views.MainPage());
+            MainPage = new NavigationPage(new Views.StudentPage());
         }
 
         public static DBContext GetContext()

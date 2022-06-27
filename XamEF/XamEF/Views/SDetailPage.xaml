@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XamEF.Views.SDetailPage"
+             Title="Detalles de estudiante">
+    <ContentPage.Content>
+        <StackLayout Margin="10,10,10,10">
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Nombre:" FontAttributes="Bold"/>
+                <Label Text="{Binding Name}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Fecha de ingreso:" FontAttributes="Bold"/>
+                <Label Text="{Binding EntryDate}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Promedio actual:" FontAttributes="Bold"/>
+                <Label Text="{Binding Average}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Estado:" FontAttributes="Bold"/>
+                <Label Text="{Binding IsStudy}"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand">
+                <Button Text="Actualizar" WidthRequest="150" Command="{Binding toUpdateStudent}"/>
+                <Button Text="Eliminar" WidthRequest="150" Command="{Binding deleteStudent}"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

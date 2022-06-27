@@ -18,6 +18,7 @@ namespace XamEF.DataContext
 
         public DbSet<Artista> Artistas { get; set; }
         public DbSet<Album> Albumes { get; set; }
+        public DbSet<Student> Studiantes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
